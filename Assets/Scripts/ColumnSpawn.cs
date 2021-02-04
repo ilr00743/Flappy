@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ColumnSpawn : MonoBehaviour
 {
+    private float _randomOffset = 1f;
     private float _startDelay = 2f;
     private float _repeatRate = 2f;
-    private float _speedMovement = 0.1f;
+    private float _interSpace = 0.1f;
 
     private Vector3 _spawnPosition;
     public GameObject obstaclePrefab;
@@ -17,9 +18,12 @@ public class ColumnSpawn : MonoBehaviour
     }
 
     void Update() 
-    {
-        _spawnPosition += new Vector3(transform.position.x * _speedMovement * Time.deltaTime,0,0);
-        transform.Translate(Vector3.right * _speedMovement * Time.deltaTime);
+    {   
+        float randomHeight = UnityEngine.Random.Range(-_randomOffset, _randomOffset);
+
+        _spawnPosition += new Vector3(transform.position.x * _interSpace * Time.deltaTime, 0, transform.position.z);
+        _spawnPosition.y = randomHeight;
+        
     }
     void SpawnObstacle()
     {
