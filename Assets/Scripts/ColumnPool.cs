@@ -12,8 +12,8 @@ public class ColumnPool : MonoBehaviour
 	private GameObject[] _columns;
 	private int _currentColumn = 0;
 
-	private Vector2 _objectPoolPosition = new Vector2(-15,-25);
-	private float _spawnXPosition = 10f;
+	private Vector2 _objectPoolPosition = new Vector2(-25f,-30f);
+	private float _spawnXPosition = 15f;
 
 	private float _timeSinceLastSpawned;
 
