@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Bird : MonoBehaviour 
+public class Ghost : MonoBehaviour 
 {
 	[SerializeField] private float _jumpForce;
 	[SerializeField] private float _speed;
@@ -19,22 +19,37 @@ public class Bird : MonoBehaviour
 		// If the bird die - turn off controller
 		if(_isDead == false) 
 		{
-			transform.Translate(new Vector2(_speed * Time.deltaTime, 0));
+			MoveRight();
 
 			if(Input.GetMouseButtonDown(0)) 
 			{
-				_rigidbody.velocity = Vector2.zero;
-				_rigidbody.AddForce(new Vector2(0, _jumpForce));
+				Jump();
 			}
 		}
 	}
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
+		Death();
+	}
+
+	void MoveRight()
+	{
+		transform.Translate(new Vector2(_speed * Time.deltaTime, 0));
+	}
+
+	void Jump()
+	{
+		_rigidbody.velocity = Vector2.zero;
+		_rigidbody.AddForce(new Vector2(0, _jumpForce));
+	}
+
+	void Death()
+	{
 		_rigidbody.velocity = Vector2.zero;
 
 		_isDead = true;
 
-		GameControl.instance.Dying();
+		GameControl.instance.Dying();	
 	}
 }
